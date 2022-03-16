@@ -1,28 +1,54 @@
-import { GetStaticProps, NextPage } from "next";
+import { NextPage } from "next";
 import { Button, Container, Dropdown, Grid, Input } from "semantic-ui-react";
-import { AiOutlineMenuUnfold } from "react-icons/ai";
+import { AiOutlineMenuFold, AiOutlineMenuUnfold } from "react-icons/ai";
 import styles from "../../styles/layout/navbar.module.css";
-import { AuthModalPropsType } from "../../dataTypes/propsTypes";
-import { useEffect, useState } from "react";
-import { TokenType } from "../../dataTypes/types";
-import jwtDecode from "jwt-decode";
+import { NavbarPropsType } from "../../dataTypes/propsTypes";
+import { useEffect } from "react";
+import { useUserContext } from "../../context/useContext";
+import { toast } from "react-toastify";
+import Link from "next/link";
 
-const Navbar: NextPage<AuthModalPropsType> = ({
+const Navbar: NextPage<NavbarPropsType> = ({
   authModalOpen,
   setAuthModalOpen,
+  setDrawerVisible,
+  drawerVisible,
 }) => {
-  const options = [
-    { key: "edit",    icon: "edit",   text: "Edit Post",    value: "edit" },
-    { key: "delete",  icon: "delete", text: "Remove Post",  value: "delete" },
-    { key: "hide",    icon: "hide",   text: "Hide Post",    value: "hide" },
-  ];
+  const { token, updateToken } = useUserContext();
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      updateToken(localStorage.getItem("name"));
+    }
+  }, [authModalOpen]);
+
+  const handleLogout = () => {
+    if (typeof window !== "undefined") {
+      toast.warn(`${localStorage.getItem("name")} Logged out `);
+      localStorage.clear();
+      updateToken("");
+    }
+  };
   return (
     <nav className={styles.navbar}>
       <Container>
         <Grid centered>
           <Grid.Column width={4} className={styles.logoWrapper}>
-            <AiOutlineMenuUnfold size={24} />
-            <h3>NextMart</h3>
+            {drawerVisible ? (
+              <AiOutlineMenuFold
+                style={{ cursor: "pointer" }}
+                size={24}
+                onClick={() => setDrawerVisible(!drawerVisible)}
+              />
+            ) : (
+              <AiOutlineMenuUnfold
+                style={{ cursor: "pointer" }}
+                size={24}
+                onClick={() => setDrawerVisible(!drawerVisible)}
+              />
+            )}
+            <Link href="/">
+              <h3 style={{cursor:"pointer"}}>NextMart</h3>
+            </Link>
           </Grid.Column>
           <Grid.Column width={8}>
             <Input
@@ -33,19 +59,35 @@ const Navbar: NextPage<AuthModalPropsType> = ({
             />
           </Grid.Column>
           <Grid.Column width={4}>
-            <Button
-              onClick={() => setAuthModalOpen(!authModalOpen)}
-              floated="right"
-              color="red"
-            >
-              Sign in
-            </Button>
+            {token ? (
+              <Button.Group color="red">
+                <Button>{token}</Button>
+
+                <Dropdown className="button icon" floating trigger={<></>}>
+                  <Dropdown.Menu>
+                    <Dropdown.Item text="Profile" icon="user" />
+                    <Dropdown.Item
+                      onClick={handleLogout}
+                      text="Logout"
+                      icon="sign-out"
+                    />
+                  </Dropdown.Menu>
+                </Dropdown>
+              </Button.Group>
+            ) : (
+              <Button
+                onClick={() => setAuthModalOpen(!authModalOpen)}
+                floated="right"
+                color="red"
+              >
+                Sign in
+              </Button>
+            )}
           </Grid.Column>
         </Grid>
       </Container>
     </nav>
   );
 };
-
 
 export default Navbar;

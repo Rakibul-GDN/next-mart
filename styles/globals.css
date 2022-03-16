@@ -14,3 +14,16 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/* Page Context */
+.pushable:not(body) {
+  transform: none !important;
+}
+
+.pushable:not(body) > .ui.sidebar,
+.pushable:not(body) > .fixed,
+.pushable:not(body) > .pusher:after {
+  position: fixed !important;
+  top: 60px;
+  z-index: 5 !important;
+}

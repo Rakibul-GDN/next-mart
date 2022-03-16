@@ -9,6 +9,14 @@ export type AuthModalPropsType = {
   setAuthModalOpen: Dispatch<SetStateAction<boolean>>;
 };
 
+export type NavbarPropsType = {
+  authModalOpen:    boolean;
+  setAuthModalOpen: Dispatch<SetStateAction<boolean>>;
+  setDrawerVisible: React.Dispatch<React.SetStateAction<boolean>>
+  drawerVisible: boolean
+};
+
+
 
 export type LoginPagePropsType = {
     setAuthModalOpen: Dispatch<SetStateAction<boolean>>

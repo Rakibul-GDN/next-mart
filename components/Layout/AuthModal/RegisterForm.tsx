@@ -26,12 +26,14 @@ const registrationFormSchema = yup.object().shape({
     .string()
     .min(6, "Password has to be minimum 6 characters")
     .required("Password is required"),
-  password2: yup.string()
-  .oneOf([yup.ref('password'), null], 'Passwords do not match').min(6, "Password has to be minimum 6 characters").required("Confirm password is required")
+  password2: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Passwords do not match")
+    .min(6, "Password has to be minimum 6 characters")
+    .required("Confirm password is required"),
 });
 
 const RegisterForm: NextPage<LoginPagePropsType> = ({ setAuthModalOpen }) => {
-  
   return (
     <Formik
       initialValues={{
@@ -43,16 +45,15 @@ const RegisterForm: NextPage<LoginPagePropsType> = ({ setAuthModalOpen }) => {
         password2: "",
       }}
       onSubmit={async (values) => {
-        const {password2, ...payload} = values
+        const { password2, ...payload } = values;
         try {
-          const isValid = await registrationFormSchema.isValid(values)
-          if(isValid){
+          const isValid = await registrationFormSchema.isValid(values);
+          if (isValid) {
             AuthApiHelper("register", payload, setAuthModalOpen);
-          } 
+          }
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
-        
       }}
       validationSchema={registrationFormSchema}
     >
@@ -136,6 +137,7 @@ const RegisterForm: NextPage<LoginPagePropsType> = ({ setAuthModalOpen }) => {
               <input
                 placeholder="Password"
                 name="password"
+                type="password"
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
@@ -149,6 +151,7 @@ const RegisterForm: NextPage<LoginPagePropsType> = ({ setAuthModalOpen }) => {
             <Form.Field>
               <label>Confirm Password</label>
               <input
+                type="password"
                 placeholder="Confirm Password"
                 name="password2"
                 onChange={handleChange}

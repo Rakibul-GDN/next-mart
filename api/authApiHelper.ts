@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { Dispatch, SetStateAction } from "react";
 import jwtDecode from "jwt-decode";
 import { TokenType } from "../dataTypes/types";
+import { useUserContext } from "../context/useContext";
 
 const AuthApiHelper = async (
   authType: string,
