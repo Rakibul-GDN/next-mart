@@ -1,19 +1,21 @@
-import { NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import { Button, Container, Dropdown, Grid, Input } from "semantic-ui-react";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
 import styles from "../../styles/layout/navbar.module.css";
 import { AuthModalPropsType } from "../../dataTypes/propsTypes";
+import { useEffect, useState } from "react";
+import { TokenType } from "../../dataTypes/types";
+import jwtDecode from "jwt-decode";
 
 const Navbar: NextPage<AuthModalPropsType> = ({
   authModalOpen,
   setAuthModalOpen,
 }) => {
   const options = [
-    { key: "edit", icon: "edit", text: "Edit Post", value: "edit" },
-    { key: "delete", icon: "delete", text: "Remove Post", value: "delete" },
-    { key: "hide", icon: "hide", text: "Hide Post", value: "hide" },
+    { key: "edit",    icon: "edit",   text: "Edit Post",    value: "edit" },
+    { key: "delete",  icon: "delete", text: "Remove Post",  value: "delete" },
+    { key: "hide",    icon: "hide",   text: "Hide Post",    value: "hide" },
   ];
-
   return (
     <nav className={styles.navbar}>
       <Container>
@@ -44,5 +46,6 @@ const Navbar: NextPage<AuthModalPropsType> = ({
     </nav>
   );
 };
+
 
 export default Navbar;
