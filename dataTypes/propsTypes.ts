@@ -19,3 +19,24 @@ export type NavbarPropsType = {
 export type LoginPagePropsType = {
   setAuthModalOpen: Dispatch<SetStateAction<boolean>>;
 };
+
+
+//used in components/layout/sidedrawer
+export type SideDrawerPropType = {
+	drawerVisible: boolean;
+}
+
+//used in components/banner
+export type BannerPropsType = {
+	img: string;
+	link: string;
+}
+
+//used in components/productcard
+export type ProductCardPropsType = {
+    productName: string;
+    productQty: string;
+    productPrice: number;
+    productImage: string;
+	inStock: number
+}

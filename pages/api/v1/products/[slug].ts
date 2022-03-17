@@ -8,11 +8,12 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<ResponseData>
 ) {
+    const {slug} = req.query
     if (req.method === "GET") {
         try {
             const result: any = await excuteQuery({
-                query: "SELECT * FROM products",
-                values: [],
+                query: "SELECT * FROM products WHERE category = ?",
+                values: [slug as string],
             });
             res.status(200).json({
                 success: true,

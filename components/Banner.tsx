@@ -1,10 +1,7 @@
 import { NextPage } from "next";
 import { Image } from "semantic-ui-react";
+import { BannerPropsType } from "../dataTypes/propsTypes";
 
-type BannerPropsType = {
-	img: string;
-	link: string;
-}
 
 const Banner: NextPage<BannerPropsType> = ({ img, link }) => {
 	return (

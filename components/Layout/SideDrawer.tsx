@@ -1,12 +1,9 @@
 import { NextPage } from "next"
 import Link from "next/link";
-import { Icon, Menu, Sidebar } from "semantic-ui-react"
+import { Menu, Sidebar } from "semantic-ui-react"
+import { SideDrawerPropType } from "../../dataTypes/propsTypes";
 
-type drawerControl = {
-	drawerVisible: boolean;
-}
-
-const SideDrawer: NextPage<drawerControl> = ({ drawerVisible }) => {
+const SideDrawer: NextPage<SideDrawerPropType> = ({ drawerVisible }) => {
 	return (
 		<Sidebar
 			as={Menu}
