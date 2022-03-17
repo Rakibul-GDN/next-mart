@@ -5,19 +5,17 @@ import { Dispatch, SetStateAction } from "react";
 //used in : components/layout/AuthModal
 
 export type AuthModalPropsType = {
-  authModalOpen:    boolean;
+  authModalOpen: boolean;
   setAuthModalOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 export type NavbarPropsType = {
-  authModalOpen:    boolean;
+  authModalOpen: boolean;
   setAuthModalOpen: Dispatch<SetStateAction<boolean>>;
-  setDrawerVisible: React.Dispatch<React.SetStateAction<boolean>>
-  drawerVisible: boolean
+  setDrawerVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  drawerVisible: boolean;
 };
 
-
-
 export type LoginPagePropsType = {
-    setAuthModalOpen: Dispatch<SetStateAction<boolean>>
-}
+  setAuthModalOpen: Dispatch<SetStateAction<boolean>>;
+};
