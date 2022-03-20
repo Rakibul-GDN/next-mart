@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@devexpress/dx-react-core": "^3.0.2",
+    "@devexpress/dx-react-grid": "^3.0.2",
+    "@devexpress/dx-react-grid-bootstrap4": "^3.0.2",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/uuid": "^8.3.4",
     "axios": "^0.26.1",

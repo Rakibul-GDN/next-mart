@@ -10,7 +10,8 @@ import SideDrawer from "./SideDrawer";
 
 const Layout: NextPage = ({ children }) => {
 	const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
-	const [drawerVisible, setDrawerVisible] = useState<boolean>(true)
+	const [drawerVisible, setDrawerVisible] = useState<boolean>(true);
+	const [role, setRole] = useState<string | null>("customer")
 	return (
 		<Container fluid>
 			<Navbar
@@ -18,9 +19,10 @@ const Layout: NextPage = ({ children }) => {
 				setAuthModalOpen={setAuthModalOpen}
 				setDrawerVisible={setDrawerVisible}
 				drawerVisible={drawerVisible}
+				setRole = {setRole}
 			/>
 			<Sidebar.Pushable>
-				<SideDrawer drawerVisible={drawerVisible} />
+				<SideDrawer drawerVisible={drawerVisible} authModalOpen={authModalOpen} setRole={setRole} role={role}/>
 				<Sidebar.Pusher>
 					<Segment basic>{children}</Segment>
 				</Sidebar.Pusher>

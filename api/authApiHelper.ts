@@ -22,7 +22,7 @@ const AuthApiHelper = async (
 			localStorage.setItem("name", 	decodedToken.name);
 			localStorage.setItem("email", 	decodedToken.email);
 			localStorage.setItem("phone", 	decodedToken.phone);
-			localStorage.setItem("gender", 	decodedToken.gender);
+			localStorage.setItem("role", 	decodedToken.role);
 			setAuthModalOpen(false);
 			if (authType === "register") {
 				toast.success(`User created for ${decodedToken.name}`);

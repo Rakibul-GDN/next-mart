@@ -6,6 +6,7 @@ import { Grid } from "semantic-ui-react";
 import Axios from "../api/apiConfig";
 import ProductApiHelper from "../api/productApiHelper";
 import ProductCard from "../components/ProductCard";
+import ProductDetailsModal from "../components/ProductDetailsModal";
 import { ProductType } from "../dataTypes/types";
 
 interface IParams extends ParsedUrlQuery {
@@ -78,8 +79,10 @@ const ProductPage: NextPage<ProductType[] | any> = ({products}) => {
 					productPrice={product.price}
 					productImage={product.product_image}
 					inStock = {product.in_stock}
+					productDescription = {product.description}
 				/>
 			))}
+			
 		</Grid>
 	);
 };
@@ -101,7 +104,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 				id: product.id,
 				name: product.name,
 				price: product.price,
-				description: product.price,
+				description: product.description,
 				product_unit: product.product_unit,
 				product_qty: product.product_qty,
 				product_image: product.product_image,

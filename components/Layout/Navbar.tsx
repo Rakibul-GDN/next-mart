@@ -13,6 +13,7 @@ const Navbar: NextPage<NavbarPropsType> = ({
 	setAuthModalOpen,
 	setDrawerVisible,
 	drawerVisible,
+	setRole
 }) => {
 	const { token, updateToken } = useUserContext();
 	useEffect(() => {
@@ -25,6 +26,7 @@ const Navbar: NextPage<NavbarPropsType> = ({
 		if (typeof window !== "undefined") {
 			toast.warn(`${localStorage.getItem("name")} Logged out `);
 			localStorage.clear();
+			setRole("customer")
 			updateToken("");
 		}
 	};
